@@ -1,0 +1,1267 @@
+/* --- Base Reset & Font Setup --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Colors (Approximate - Get exact from Figma) */
+    --gradient-start: #1abc9c;  /* Lighter teal/green */
+    --gradient-end: #ffffff;    /* Original Teal background */
+    --background-teal: #16a085; /* Fallback */
+    --text-white: #ffffff;
+    --text-dark-teal: #117a65; /* Darker teal for button text */
+    --button-white-bg: #ffffff;
+    --nav-link-color: #f0fdfa; /* Slightly off-white for nav links */
+    --nav-link-hover: #ffffff;
+
+    /* Fonts */
+    --font-primary: 'Poppins', sans-serif;
+
+    /* Animation Timing */
+    --anim-duration: 0.7s;
+    --anim-delay-step: 0.15s;
+
+    /* Header Height (for potential calculations) */
+    --header-height: 80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--text-white); /* Default text color for the hero */
+    /* Gradient applied to wrapper now */
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative; /* Needed for mobile nav overlay */
+}
+
+.page-wrapper {
+    /* Applied Gradient Background */
+    background: linear-gradient(177deg, var(--gradient-start), var(--gradient-end));
+    background-color: var(--background-teal); /* Fallback */
+    min-height: 100vh; /* Minimum height for viewport coverage */
+}
+
+
+/* --- Container --- */
+.container {
+    max-width: 1200px; /* Adjust based on Figma design width */
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.main-header {
+    background-color: #1abc9c; /* Header background blends with gradient */
+    padding: 15px 0;
+    position: fixed; /* Position over the hero section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px; /* Adjust logo size */
+    display: block;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px; /* Space between nav items */
+}
+
+.main-nav a {
+    color: var(--nav-link-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+    color: var(--nav-link-hover);
+    text-decoration: underline;
+}
+
+.cta-button {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 50px; /* Pill shape */
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.header-cta {
+    background-color: var(--button-white-bg);
+    color: var(--text-dark-teal);
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+}
+
+.header-cta:hover {
+    background-color: transparent;
+    color: var(--button-white-bg);
+    border: 1px solid var(--button-white-bg);
+    transform: translateY(-2px);
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 101; /* Above nav */
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-white);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* --- Hero Section --- */
+.hero-section {
+    min-height: 90vh; /* Or 100vh depending on desired look */
+    padding-top: calc(var(--header-height) + 60px); /* Space below header */
+    padding-bottom: 60px;
+    display: flex;
+    align-items: center;
+    position: relative; /* For image positioning */
+    overflow: hidden;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Hero Content (Left) */
+.hero-content {
+    flex-basis: 50%; /* Take half the space */
+    max-width: 550px;
+    z-index: 5; /* Ensure text is above potential image overlap */
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 3rem; /* Adjust as needed */
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+    color: var(--text-white);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    color: var(--nav-link-color); /* Slightly softer white */
+    max-width: 480px; /* Limit paragraph width */
+}
+
+/* App Buttons Section */
+.app-buttons {
+    display: flex;
+    flex-direction: column; /* Stack label and button group */
+    align-items: flex-start; /* Align items to the start (left) */
+    gap: 15px; /* Space between label and button group */
+}
+
+.app-buttons-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-white);
+    margin-bottom: -25px; /* Remove bottom margin, use gap instead */
+}
+
+/* Wrapper for the store buttons */
+.button-group {
+    display: flex;
+    align-items: center;
+}
+
+.button-group a img {
+    height: 45px; /* Adjust badge height */
+    display: block; /* Prevents potential extra space */
+    transition: transform 0.3s ease;
+}
+
+.button-group a:hover img {
+    transform: scale(1.05);
+}
+
+/* Hero Images (Right) */
+.hero-images {
+    flex-basis: 50%;
+    position: relative; /* Context for absolute positioning */
+    /* Adjust min-height based on the new phone height + positioning */
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align phones towards the bottom */
+}
+
+.phone-img {
+    /* Fixed dimensions as requested */
+    width: 270.14px;
+    height: 550.14px;
+    object-fit: contain; /* Prevents image distortion if aspect ratio differs */
+    max-width: 100%; /* Still allow shrinking on very small viewports if needed */
+
+    position: absolute; /* Position them relative to .hero-images */
+    bottom: 0;         /* Align bottom edge */
+    transition: transform 0.3s ease;
+}
+
+.phone-img:hover {
+    transform: scale(1.02) translateY(-5px); /* Subtle hover effect */
+}
+
+.phone-1 {
+    /* Position the first phone */
+    left: 0; /* Adjust as needed */
+    z-index: 10; /* In front */
+    transform: rotate(-5deg); /* Slight rotation */
+}
+
+.phone-2 {
+    /* Position the second phone slightly behind and offset */
+    left: 299px; /* Adjust overlap based on new width */
+    bottom: -25px; /* Slightly lower */
+    z-index: 5; /* Behind phone-1 */
+    transform: rotate(5deg); /* Slight rotation */
+}
+
+
+/* --- Animations --- */
+.animate-on-load {
+    opacity: 0;
+}
+.fade-in-up {
+    transform: translateY(40px);
+    transition: opacity var(--anim-duration) ease-out, transform var(--anim-duration) ease-out;
+}
+.fade-in-right {
+    transform: translateX(50px);
+     transition: opacity var(--anim-duration) ease-out, transform var(--anim-duration) ease-out;
+}
+.fade-in-down {
+    transform: translateY(-30px);
+     transition: opacity var(--anim-duration) ease-out, transform var(--anim-duration) ease-out;
+}
+.delay-1 { transition-delay: var(--anim-delay-step); }
+.delay-2 { transition-delay: calc(var(--anim-delay-step) * 2); }
+.animate-on-load.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+
+/* --- Responsiveness --- */
+
+/* Tablets */
+@media (max-width: 992px) {
+    :root { --header-height: 70px; }
+    .main-header { height: var(--header-height); }
+
+    .hero-container { gap: 30px; align-items: center; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .hero-content p { font-size: 1rem; }
+
+    .hero-images { min-height: 580px; /* Adjust height slightly */ }
+    .phone-img {
+        /* Slightly smaller on tablets */
+        width: 240px;
+        height: 488px; /* Maintain approx ratio */
+    }
+     .phone-2 {
+        left: 100px; /* Adjust overlap */
+        bottom: -20px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    :root { --header-height: 65px; }
+
+    .main-header {
+         height: var(--header-height);
+         /* Keep solid background for fixed header */
+         background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+         position: fixed;
+         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    /* Mobile Nav Styles (keep as before) */
+    .main-nav { display: none; position: fixed; top: var(--header-height); left: 0; width: 100%; height: calc(100vh - var(--header-height)); background-color: rgba(22, 160, 133, 0.98); flex-direction: column; align-items: center; justify-content: center; padding-top: 40px; opacity: 0; visibility: hidden; transform: translateY(-20px); transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease; backdrop-filter: blur(5px); }
+    .main-nav.active { display: flex; opacity: 1; visibility: visible; transform: translateY(0); }
+    .main-nav ul { flex-direction: column; text-align: center; gap: 25px; }
+    .main-nav a { font-size: 1.3rem; color: var(--text-white); }
+    .header-cta { display: none; }
+    .mobile-nav-toggle { display: block; }
+    .mobile-nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .mobile-nav-toggle.active span:nth-child(2) { opacity: 0; }
+    .mobile-nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+
+    /* Hero adjustments for mobile */
+    .hero-section {
+        padding-top: calc(var(--header-height) + 40px);
+        padding-bottom: 40px;
+        min-height: auto;
+        text-align: center;
+    }
+    .hero-container {
+        flex-direction: column;
+        gap: 30px; /* Reduced gap a bit */
+    }
+    .hero-content {
+        flex-basis: auto;
+        max-width: 100%;
+        order: 2;
+    }
+     .hero-content h1 { font-size: 2rem; }
+     .hero-content p { font-size: 0.95rem; max-width: 90%; margin-left: auto; margin-right: auto;}
+
+    /* App buttons centered on mobile */
+    .app-buttons {
+        align-items: center; /* Center label and button group */
+        gap: 10px;
+    }
+    .button-group {
+        justify-content: center; /* Center the buttons within their group */
+        gap: 15px;
+    }
+     .button-group a img {
+         height: 40px;
+     }
+
+    /* Images on mobile */
+    .hero-images {
+        flex-basis: auto;
+        order: 1;
+        width: 100%;
+        max-width: 320px; /* Limit container width */
+        min-height: 460px; /* Adjust based on scaled phone height */
+        margin: 0 auto 20px auto; /* Center and add bottom margin */
+        align-items: flex-end; /* Keep phones bottom aligned */
+    }
+    .phone-img {
+        /* Scale down phones for mobile */
+        width: 180px;
+        height: 366px; /* Maintain approx ratio */
+        max-width: 48%; /* Use percentage as fallback */
+    }
+     .phone-1 {
+        left: 5%; /* Position using percentage */
+        bottom: 0;
+        transform: rotate(-5deg);
+    }
+     .phone-2 {
+         left: 47%; /* Position using percentage */
+         bottom: -15px; /* Adjust vertical offset */
+         transform: rotate(5deg);
+    }
+}
+
+@media (max-width: 480px) {
+     .hero-content h1 { font-size: 1.8rem; }
+     .hero-content p { font-size: 0.9rem; }
+
+     .hero-images { min-height: 400px; max-width: 280px; } /* Further adjust container */
+     .phone-img {
+         width: 150px;
+         height: 305px; /* Maintain approx ratio */
+     }
+     .phone-1 { left: 3%; }
+     .phone-2 { left: 45%; bottom: -10px; }
+
+     .button-group a img { height: 35px; }
+}
+/* --- App Screenshots Section --- */
+/* --- App Screenshots Section --- */
+.screenshots-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    color: #333333;
+    overflow-x: hidden;
+}
+
+.section-header {
+    margin-bottom: 50px;
+}
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+.section-header .subtitle {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.text-center { text-align: center; }
+
+/* Slider Styles */
+.slider-container {
+    position: relative;
+    /* Accommodate 3 cards (approx 300px each) + gaps + space for nav buttons */
+    max-width: 1080px; /* (290*3 slides) + (30*2 gaps) + (25*2 button offset from edge) */
+    margin: 0 auto 50px auto;
+    /* Add padding for nav buttons to sit within this container but outside the slide track */
+    padding: 0 50px; /* Horizontal space for buttons. Adjust as needed. */
+    box-sizing: border-box;
+    overflow: hidden; /* CRUCIAL for clipping slides */
+}
+
+.screenshot-slider {
+    display: flex;
+    gap: 57px; /* Space between slides. Ensure JS accounts for this. */
+    transition: transform 0.5s ease-in-out;
+    /* The slider track might appear slightly off due to container padding.
+       If so, negative margins can pull it into the padded space.
+       Or ensure its width calculation in JS is perfect.
+       For now, let's rely on JS positioning. */
+}
+
+.slide {
+    /* This is the white card */
+    background-color: #fff;
+    border-radius: 24px; /* Rounded corners for the card */
+    box-shadow: 0px 10px 25px rgba(46, 54, 62, 0.08); /* Subtle shadow */
+    padding: 15px;       /* Inner padding for the card, around the image */
+    box-sizing: border-box;
+
+    flex-shrink: 0; /* Prevent slides from shrinking */
+    /* Card width = image width (260) + L/R padding (15*2=30) = 290px */
+    width: 290px;
+    /* Card height = image height (530) + T/B padding (15*2=30) = 560px */
+    min-height: 560px; /* Use min-height to ensure consistency */
+
+    display: flex; /* For centering image if needed */
+    align-items: center;
+    justify-content: center;
+}
+
+.slide img {
+    width: 260px;
+    height: 530px;
+    object-fit: contain; /* Prevents distortion if aspect ratio of image file differs */
+    display: block;
+    /* Shadow and radius are now on the .slide (card) */
+}
+
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #0ebbb6; /* Teal color */
+    color: var(--text-white);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.slider-nav:hover {
+    background-color: var(--gradient-start); /* Lighter teal on hover */
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slider-nav.prev {
+    left: 10px; /* Position relative to .slider-container's padding edge */
+}
+.slider-nav.next {
+    right: 10px; /* Position relative to .slider-container's padding edge */
+}
+.slider-nav svg { pointer-events: none; }
+
+.screenshots-description {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555555;
+}
+
+/* --- Screenshots Section Responsiveness --- */
+@media (max-width: 1100px) { /* When container starts to shrink */
+    .slider-container {
+        padding: 0 40px; /* Reduce button space slightly */
+    }
+}
+
+@media (max-width: 992px) { /* Smaller tablets - aim for 2 slides if possible, or adaptive */
+    /* JS getSlidesPerPage will determine how many slides to "page" by.
+       CSS ensures slides are still their defined width.
+       The slider-container width becomes the limiting factor. */
+    .slider-container {
+        padding: 0 30px;
+        /* max-width: 650px; /* (290*2 slides) + (30*1 gap) + (20*2 button offset) */
+    }
+}
+
+@media (max-width: 768px) { /* Mobile - generally 1 slide view */
+    .section-header h2 { font-size: 2rem; }
+    .section-header .subtitle { font-size: 1rem; }
+
+    .slider-container {
+        padding: 0 20px; /* Less space for buttons */
+        max-width: 350px; /* (290*1 slide) + (20*2 button offset) */
+    }
+    .slide {
+        /* On mobile, you might want the card to be slightly smaller if 290px is too wide */
+        width: 270px; /* Adjust card width */
+        min-height: 520px; /* image height (480) + padding (15*2=30) */
+    }
+    .slide img {
+        width: 240px; /* Adjust image width */
+        height: 490px; /* Adjust image height */
+    }
+
+    .slider-nav { width: 40px; height: 40px; }
+    .slider-nav.prev { left: 5px; }
+    .slider-nav.next { right: 5px; }
+
+    .screenshots-description { font-size: 0.95rem; padding: 0 15px; }
+}
+
+@media (max-width: 480px) {
+    .screenshots-section { padding: 60px 0; }
+    .section-header h2 { font-size: 1.8rem; }
+    .section-header .subtitle { font-size: 0.9rem; }
+    .slider-container {
+        padding: 0 15px;
+        max-width: 300px; /* Further refine for very small screens */
+    }
+     .slide {
+        width: 250px;
+        min-height: 500px; /* img 460 + pad 30 */
+    }
+    .slide img {
+        width: 220px;
+        height: 470px;
+    }
+    .screenshots-description { font-size: 0.9rem; }
+}
+
+/* --- About Us Section --- */
+.about-section {
+    padding: 80px 0;
+    /* Gradient background as requested, similar to hero */
+    background: linear-gradient(135deg, var(--gradient-start, #1abc9c), var(--gradient-end, #16a085));
+    background-color: var(--gradient-end, #16a085); /* Fallback */
+    color: var(--text-white, #ffffff); /* Default text color for this section */
+    overflow-x: hidden; /* Prevent horizontal scroll from animations */
+}
+
+/* Re-use .section-header, but ensure text color contrasts with gradient */
+.about-section .section-header h2,
+.about-section .section-header .subtitle {
+    color: var(--text-white, #ffffff);
+}
+.about-section .section-header .subtitle {
+    color: var(--nav-link-color, #f0fdfa); /* Slightly softer white for subtitle */
+}
+
+
+.about-content-wrapper {
+    display: flex;
+    align-items: center; /* Vertically align items */
+    gap: 50px; /* Space between logo card and text */
+    margin-top: 40px;
+}
+
+.about-logo-card {
+    flex-basis: 40%; /* Adjust basis as needed */
+    max-width: 400px; /* Max width for the logo card */
+    min-height: 300px; /* Minimum height */
+    background-color: #0ebbb6; /* Solid teal background for the card */
+    /* If you want a slightly different teal for the card:
+       background-color: #117a65; e.g., a darker teal
+    */
+    border-radius: 20px;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.about-logo-card img {
+    max-width: 80%; /* Logo size within the card */
+    height: auto;
+    /* If your logo SVG needs to be explicitly colored white and doesn't use fill="currentColor" */
+    /* filter: brightness(0) invert(1); */ /* This can make a black SVG white */
+    /* Or, if your SVG's fill is currentColor: */
+    /* color: white; /* The SVG will inherit this if paths are fill="currentColor" */
+}
+
+.about-text-content {
+    flex-basis: 60%; /* Adjust basis as needed */
+}
+
+.about-text-content h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--text-white, #ffffff);
+}
+
+.about-text-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    color: var(--nav-link-color, #f0fdfa); /* Softer white for paragraphs */
+}
+.about-text-content p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Animations for this section (fade-in-left, fade-in-right) */
+/* Ensure these are defined in your general animation styles or add them here */
+.fade-in-left {
+    transform: translateX(-50px);
+    transition: opacity var(--anim-duration, 0.6s) ease-out, transform var(--anim-duration, 0.6s) ease-out;
+}
+/* .fade-in-right is already defined in hero/screenshots section CSS */
+/* If not, define it:
+.fade-in-right {
+    transform: translateX(50px);
+    transition: opacity var(--anim-duration, 0.6s) ease-out, transform var(--anim-duration, 0.6s) ease-out;
+}
+*/
+
+/* --- About Us Section Responsiveness --- */
+@media (max-width: 992px) {
+    .about-content-wrapper {
+        gap: 30px;
+    }
+    .about-logo-card {
+        flex-basis: 45%;
+        padding: 30px;
+    }
+    .about-text-content {
+        flex-basis: 55%;
+    }
+    .about-text-content h3 {
+        font-size: 1.6rem;
+    }
+    .about-text-content p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 60px 0;
+    }
+    .about-section .section-header h2 { /* Copied from screenshots section */
+        font-size: 2rem;
+    }
+    .about-section .section-header .subtitle {
+        font-size: 1rem;
+    }
+
+    .about-content-wrapper {
+        flex-direction: column; /* Stack items vertically */
+        text-align: center; /* Center text for stacked layout */
+        gap: 40px;
+    }
+    .about-logo-card {
+        flex-basis: auto; /* Allow it to take full width when stacked */
+        width: 100%;
+        max-width: 350px; /* Limit width on mobile */
+        margin: 0 auto; /* Center the card */
+        min-height: 250px;
+        padding: 30px;
+    }
+    .about-logo-card img {
+        max-width: 60%;
+    }
+    .about-text-content {
+        flex-basis: auto; /* Allow it to take full width when stacked */
+    }
+    .about-text-content h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+    .about-section .section-header .subtitle {
+        font-size: 0.9rem;
+    }
+    .about-logo-card {
+        max-width: 300px;
+        min-height: 220px;
+        padding: 25px;
+    }
+    .about-text-content p {
+        font-size: 0.9rem;
+    }
+}
+/* --- Why Choose Us Section --- */
+.why-choose-us-section {
+    padding: 80px 0;
+    background-color: #f8f9fa; /* Light grey background */
+    color: #333333; /* Default text color for this section */
+    overflow-x: hidden;
+}
+
+/* Re-use .section-header styles, text color will be default dark */
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-item {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+    margin-bottom: 20px;
+}
+
+.feature-icon svg {
+    width: 50px;
+    height: 50px;
+    color: var(--gradient-end, #16a085); /* Teal icon color */
+}
+
+.feature-item h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555555;
+}
+
+
+/* --- FAQ Section --- */
+.faq-section {
+    padding: 80px 0;
+    background-color: #ffffff; /* White background */
+    color: #333333;
+    overflow-x: hidden;
+}
+
+/* Re-use .section-header styles, text color will be default dark */
+
+.faq-accordion {
+    max-width: 800px;
+    margin: 40px auto 0 auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden; /* For rounded corners on items */
+}
+
+.faq-item {
+    border-bottom: 1px solid #e0e0e0;
+}
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.faq-question:hover {
+    background-color: #f9f9f9;
+}
+
+.faq-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+.faq-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #555;
+}
+.faq-icon .minus { display: none; }
+
+.faq-question[aria-expanded="true"] .faq-icon .plus { display: none; }
+.faq-question[aria-expanded="true"] .faq-icon .minus { display: block; }
+/* Optional: rotate icon
+.faq-question[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg); // If using a single plus icon
+}
+*/
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0), padding 0.4s ease; /* Smooth transition */
+    background-color: #fdfdfd; /* Slightly different bg for answer */
+}
+.faq-answer p {
+    padding: 0 20px 20px 20px; /* Padding only when expanded */
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #555555;
+    margin:0;
+}
+
+.faq-question [aria-expanded="true"] + 
+.faq-answer {
+    /* max-height will be set by JS, but this is a fallback or for non-JS */
+    /* max-height: 500px; /* A large enough value */
+    /* padding-top: 0; (already handled in p)
+    padding-bottom: 20px; */
+}
+
+/* --- Responsiveness for Why Choose Us & FAQ --- */
+
+@media (max-width: 768px) {
+    /* Why Choose Us */
+    .features-grid {
+        grid-template-columns: 1fr; /* Stack to single column */
+    }
+    .feature-item {
+        padding: 25px;
+    }
+    .feature-item h3 {
+        font-size: 1.3rem;
+    }
+
+    /* FAQ */
+    .faq-section, .why-choose-us-section {
+        padding: 60px 0;
+    }
+    .faq-accordion {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .faq-question {
+        font-size: 1rem;
+        padding: 15px;
+    }
+    .faq-answer p {
+        font-size: 0.95rem;
+        padding: 0 15px 15px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Why Choose Us */
+    .feature-item h3 {
+        font-size: 1.2rem;
+    }
+    .feature-item p {
+        font-size: 0.9rem;
+    }
+
+    /* FAQ */
+    .faq-question {
+        font-size: 0.95rem;
+    }
+    .faq-answer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Footer Section --- */
+/* --- Footer Section --- */
+.site-footer {
+    background-color: #14595B; /* Exact color from Figma */
+    color: var(--text-white, #ffffff);
+    padding: 50px 0 25px 0;
+    font-size: 0.9rem; /* Slightly smaller base font for footer */
+}
+
+.footer-content-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px; /* Gap between left and right columns */
+    flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+    margin-bottom: 40px; /* Space before bottom bar */
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column; /* Stack items within each column */
+}
+
+.footer-col-left {
+    flex-basis: 55%; /* Adjust basis for left column */
+    gap: 20px; /* Space between logo, nav, and CTA within the left column */
+}
+
+.footer-col-right {
+    flex-basis: 40%; /* Adjust basis for right column */
+    align-items: flex-start; /* Default alignment for items in right col */
+    gap: 25px; /* Space between contact info and social icons */
+}
+
+.footer-logo-main img {
+    max-height: 45px; /* Adjust logo size */
+    display: block; /* Remove extra space below image */
+}
+
+.footer-main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px; /* Space between nav items */
+    flex-wrap: wrap;
+}
+.footer-main-nav a {
+    color: var(--nav-link-color, #e0e0e0); /* Slightly softer white */
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+.footer-main-nav a:hover {
+    color: var(--text-white, #ffffff);
+    text-decoration: underline;
+}
+
+.footer-main-cta h2 {
+    font-size: 1.6rem; /* Adjusted size for this placement */
+    font-weight: 700;
+    line-height: 1.4;
+    margin-top: 10px; /* Space above CTA if nav is short */
+    max-width: 450px; /* Limit width of CTA text */
+}
+
+.footer-contact-info {
+    width: 100%; /* Take full width of its column part */
+}
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+.footer-contact-item:last-child { margin-bottom: 0; }
+
+.contact-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px; /* Fine-tune vertical alignment */
+}
+.contact-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+.footer-contact-info p, .footer-contact-info a {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--nav-link-color, #e0e0e0);
+    font-size: 0.9rem;
+}
+.footer-contact-info a {
+    text-decoration: none;
+}
+.footer-contact-info a:hover {
+    text-decoration: underline;
+    color: var(--text-white, #ffffff);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 12px; /* Slightly smaller gap for social icons */
+    flex-wrap: wrap;
+    width: 100%; /* Take full width of its column part */
+}
+.footer-social-icons a {
+    color: var(--text-white, #ffffff);
+    background-color: rgba(255, 255, 255, 0.1);
+    width: 32px; /* Slightly smaller social icons */
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.footer-social-icons a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+.footer-social-icons svg {
+    width: 16px; /* Smaller SVGs inside icons */
+    height: 16px;
+    fill: currentColor;
+}
+
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+    margin-top: 30px; /* Added margin-top to ensure separation if content-grid collapses early */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 0.85rem;
+}
+
+.footer-copyright {
+    color: var(--nav-link-color, #e0e0e0);
+    flex-grow: 1; /* Allows it to take space */
+    text-align: left; /* Default, will be centered on mobile */
+}
+
+.footer-utility-nav a {
+    color: var(--nav-link-color, #e0e0e0);
+    text-decoration: none;
+    margin-left: 20px; /* Space between utility links if more are added */
+    transition: color 0.3s ease;
+}
+.footer-utility-nav a:hover {
+    color: var(--text-white, #ffffff);
+    text-decoration: underline;
+}
+
+/* --- Footer Responsiveness --- */
+@media (max-width: 992px) { /* Tablets */
+    .footer-col-left {
+        flex-basis: 100%; /* Left column takes full width */
+        order: 1; /* Appears first */
+        align-items: center; /* Center items in left column */
+        text-align: center; /* Center text */
+    }
+    .footer-main-nav ul {
+        justify-content: center;
+    }
+    .footer-main-cta h2 {
+        max-width: 100%; /* Allow full width for CTA text */
+        font-size: 1.5rem;
+    }
+    .footer-col-right {
+        flex-basis: 100%; /* Right column takes full width */
+        order: 2; /* Appears second */
+        align-items: center; /* Center items in right column */
+        margin-top: 30px; /* Space when it stacks below */
+    }
+    .footer-contact-info {
+        text-align: center; /* Center contact text */
+    }
+    .footer-contact-item {
+        justify-content: center;
+        max-width: 350px;
+    }
+    .footer-social-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) { /* Mobile */
+    .site-footer {
+        padding: 40px 0 20px 0;
+    }
+     .footer-logo-main img {
+        max-height: 40px;
+    }
+    .footer-main-cta h2 {
+        font-size: 1.4rem;
+    }
+    .footer-main-nav ul {
+        gap: 10px 15px; /* Smaller gap for nav items */
+    }
+    .footer-main-nav a {
+        font-size: 0.9rem;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+    .footer-copyright {
+        order: 2; /* Copyright below utility links */
+        width: 100%;
+    }
+    .footer-utility-nav {
+        order: 1;
+        width: 100%;
+        text-align: center;
+    }
+    .footer-utility-nav a {
+        margin: 0 10px; /* Adjust spacing for centered links */
+    }
+}
+
+
+/*privacy*/
+/* --- Privacy Policy Page Specific Styles --- */
+.privacy-policy-page {
+    padding: 60px 0; /* Add some padding around the content */
+    background-color: #fff; /* Assuming a white background for readability */
+    color: #333; /* Default text color for the policy page */
+}
+
+.privacy-content {
+    max-width: 800px; /* Limit width for better readability */
+    margin: 0 auto;   /* Center the content */
+}
+
+.privacy-content h1 {
+    font-size: 5.5rem;
+    color: #2c3e50; /* Darker heading color */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.privacy-content .last-updated {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 30px;
+}
+
+.privacy-content h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.privacy-content h3 {
+    font-size: 1.4rem;
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.privacy-content h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.privacy-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: #555; /* Slightly lighter than pure black for body text */
+}
+
+.privacy-content ul {
+    list-style-type: disc;
+    margin-left: 25px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.privacy-content li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.privacy-content strong {
+    font-weight: 600;
+    color: #333;
+}
+
+.privacy-content a {
+    color: #16a085; /* Use your site's accent color for links */
+    text-decoration: none;
+}
+
+.privacy-content a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for privacy policy content */
+@media (max-width: 768px) {
+    .privacy-policy-page {
+        padding: 40px 15px;
+    }
+    .privacy-content h1 {
+        font-size: 2rem;
+    }
+    .privacy-content h2 {
+        font-size: 1.6rem;
+    }
+    .privacy-content h3 {
+        font-size: 1.3rem;
+    }
+    .privacy-content p {
+        font-size: 0.95rem;
+    }
+}
